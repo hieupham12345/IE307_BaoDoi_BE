@@ -7,7 +7,7 @@ const articleSchema = new mongoose.Schema(
     content: { type: String, required: true },
     author: { type: String, required: true },
     hashtags: [{ type: String }], 
-    imgUrls: [{ type: String }],
+    imgUrl: { type: String },
   },
   {
     timestamps: true,
