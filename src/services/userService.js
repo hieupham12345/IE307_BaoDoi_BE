@@ -84,7 +84,32 @@ const loginUser = (userLogin) => {
     })
 } 
 
+const getDetailUser = (id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const checkUserID = await user.findOne({
+                _id: id
+            })
+            if (checkUserID === null) {
+                resolve ({
+                    status: 'ERR',
+                    message: 'The user is not defined'
+                })
+            }
+            resolve({
+                status: 'OK ',
+                message: 'Success',
+                data: checkUserID
+            })
+        }
+        catch(e) {
+            reject(e)
+        }
+    })
+} 
+
 module.exports = { 
     createUser,
-    loginUser    
+    loginUser,
+    getDetailUser
 }
