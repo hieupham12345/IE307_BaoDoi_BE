@@ -9,13 +9,13 @@ const createUser = (newUser) => {
 
         try {
             const checkUser = await user.findOne({
-                email: email
+                username: username
             })
 
             if (checkUser !== null) {
                 resolve({
                     status: 'ERR',
-                    message: 'The username is already'
+                    message: 'The user is already'
                 })
             } else {
                 const hash = bcrypt.hashSync(password, 10)
