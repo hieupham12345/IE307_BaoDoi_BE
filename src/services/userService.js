@@ -15,7 +15,7 @@ const createUser = (newUser) => {
             if (checkUser !== null) {
                 resolve({
                     status: 'ERR',
-                    message: 'The phone number is already'
+                    message: 'The username is already'
                 })
             } else {
                 const hash = bcrypt.hashSync(password, 10)
