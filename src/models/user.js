@@ -6,6 +6,8 @@ const userSchema = new mongoose.Schema(
         email: {type: String, unique: false},
         access_token: {type: String, require: true},
         refesh_token: {type: String, require: true},
+        recently_read_articles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Article' }],
+        liked_articles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Article' }]
     },
     {
         timestamps: true

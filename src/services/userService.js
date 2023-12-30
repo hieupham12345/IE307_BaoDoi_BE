@@ -84,7 +84,7 @@ const loginUser = (userLogin) => {
     })
 } 
 
-const getDetailUser = (id) => {
+const getDetailUser = (userId) => {
     return new Promise(async (resolve, reject) => {
         try {
             const checkUserID = await user.findOne({
@@ -108,8 +108,38 @@ const getDetailUser = (id) => {
     })
 } 
 
+const updateUser = async (userId, updateData) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const checkUserID = await user.findOne({
+                _id: userId
+            })
+            if (checkUserID === null) {
+                resolve ({
+                    status: 'ERR',
+                    message: 'The user is not defined'
+                })
+            }
+            const updatedUser = await user.findByIdAndUpdate(
+                userId,
+                updateData,
+                { new: true }
+            );
+            resolve({
+                status: 'OK ',
+                message: 'Success',
+                data: updatedUser
+            })
+        }
+        catch(e) {
+            reject(e)
+        }
+    })
+} 
+
 module.exports = { 
     createUser,
     loginUser,
-    getDetailUser
+    getDetailUser,
+    updateUser
 }
