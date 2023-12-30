@@ -90,7 +90,7 @@ const getDetailUser = (userId) => {
             const checkUserID = await user.findOne({
                 _id: userId
             })
-
+            console.log(checkUserID)
             if (checkUserID === null) {
                 resolve ({
                     status: 'ERR',

@@ -22,7 +22,20 @@ const getByCategory = async (req, res) => {
   }
 };
 
+const getById = async (req, res) => {
+  try {
+    const ArticleId  = req.params.id; // Assuming category is in the URL params
+
+    const article = await articleService.getById(ArticleId);
+    res.status(200).json(article);
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 module.exports = {
   createArticle,
-  getByCategory
+  getByCategory,
+  getById
 };

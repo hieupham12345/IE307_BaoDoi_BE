@@ -38,8 +38,33 @@ const getByCategory = (category) => {
   });
 };
 
+const getById = (AId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const checkArticle = await article.findOne({
+                _id: AId
+            })
+
+            if (checkArticle === null) {
+                resolve ({
+                    status: 'ERR',
+                    message: 'The article is not defined'
+                })
+            }
+            resolve({
+                status: 'OK ',
+                message: 'Success',
+                data: checkArticle
+            })
+        }
+        catch(e) {
+            reject(e)
+        }
+    })
+} 
 
 module.exports = {
     createArticle,
-    getByCategory
+    getByCategory,
+    getById
 }
