@@ -88,8 +88,9 @@ const getDetailUser = (userId) => {
     return new Promise(async (resolve, reject) => {
         try {
             const checkUserID = await user.findOne({
-                _id: id
+                _id: userId
             })
+
             if (checkUserID === null) {
                 resolve ({
                     status: 'ERR',
