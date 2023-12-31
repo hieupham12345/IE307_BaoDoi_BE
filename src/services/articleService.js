@@ -23,19 +23,24 @@ const createArticle = (title, category, content, author, imgUrl) => {
     })
 }
 
-const getByCategory = (category) => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const articles = await article.find({ category });
-      resolve({
-        status: 'OK',
-        message: 'SUCCESS',
-        data: articles
-      });
-    } catch (e) {
-      reject(e);
+const getByCategory = async (category, limit) => {
+  try {
+    let query = article.find({ category });
+
+    if (limit) {
+      query = query.limit(parseInt(limit, 10)); // Parse limit to an integer
     }
-  });
+
+    const articles = await query.exec();
+
+    return {
+      status: 'OK',
+      message: 'SUCCESS',
+      data: articles,
+    };
+  } catch (error) {
+    throw error;
+  }
 };
 
 const getById = (AId) => {

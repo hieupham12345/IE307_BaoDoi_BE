@@ -13,8 +13,10 @@ const createArticle = async (req, res) => {
 
 const getByCategory = async (req, res) => {
   try {
-    const { category } = req.params; // Assuming category is in the URL params
-    const articles = await articleService.getByCategory(category);
+    const { category } = req.params;
+    const { limit } = req.query;
+    console.log(limit, category)    
+    const articles = await articleService.getByCategory(category, limit);
     res.status(200).json(articles);
   } catch (error) {
     console.error('Error getting articles by category:', error);
